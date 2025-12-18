@@ -1,8 +1,8 @@
 (() => {
   // --- Multi-user sync (optionnel) ---
   // Pour activer : crée un projet Supabase + table `leads` (voir README) puis renseigne ces 2 valeurs.
-  const SUPABASE_URL = "";      // ex: https://xxxx.supabase.co
-  const SUPABASE_ANON_KEY = ""; // ex: eyJhbGciOi...
+  const SUPABASE_URL = "https://fescbbgnpuhapbtzyryr.supabase.co";      // ex: https://xxxx.supabase.co
+  const SUPABASE_ANON_KEY = "sb_publishable_U2uwrgYj-cg6DZJLmn5T8Q_jzzbTDEW"; // ex: eyJhbGciOi...
   const USE_SUPABASE = SUPABASE_URL && SUPABASE_ANON_KEY && window.supabase;
   const sb = USE_SUPABASE ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
