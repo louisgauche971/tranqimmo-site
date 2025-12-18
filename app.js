@@ -1,4 +1,12 @@
 (() => {
+  // --- Multi-user sync (optionnel) ---
+  // Pour activer : crée un projet Supabase + table `leads` (voir README) puis renseigne ces 2 valeurs.
+  const SUPABASE_URL = "";      // ex: https://xxxx.supabase.co
+  const SUPABASE_ANON_KEY = ""; // ex: eyJhbGciOi...
+  const USE_SUPABASE = SUPABASE_URL && SUPABASE_ANON_KEY && window.supabase;
+  const sb = USE_SUPABASE ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+
   const LS_KEY = "tranqimmo_mvp_var_v1";
   const STAGES = [
     { key: "nouveau", label: "Nouveau", dot: "bdot--new" },
@@ -244,7 +252,7 @@
     }
   }
 
-  function openLeadInSide(id){
+  async function openLeadInSide(id){
     const st=loadState();
     const path=(location.hash||"#/").slice(1).split("?")[0]||"/";
     const side=qs(path==="/perdus"?"#lostSide":"#proSide");
@@ -297,7 +305,7 @@
     openLeadInSide(leadId);
   }
 
-  function addDemoLead(){
+  async function addDemoLead(){
     const st=loadState();
     const city=VAR_CITIES[Math.floor(Math.random()*VAR_CITIES.length)];
     const cp="83"+String(Math.floor(100+Math.random()*900)).padStart(3,"0");

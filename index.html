@@ -24,6 +24,15 @@
       </a>
 
       <nav class="nav" id="nav">
+        <div class="navselect">
+          <label class="navselect__label" for="navSelect">Navigation</label>
+          <select id="navSelect" class="navselect__select" aria-label="Aller à…">
+            <option value="#/">Accueil</option>
+            <option value="#/demande">Déposer une demande</option>
+            <option value="#/pro">Espace Pro</option>
+            <option value="#/aide">Mode test</option>
+          </select>
+        </div>
         <a href="#/">Accueil</a>
         <a href="#/demande">Déposer une demande</a>
         <a href="#/pro">Espace Pro</a>
@@ -58,6 +67,7 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="app.js"></script>
 </body>
 </html>
