@@ -5,6 +5,8 @@
   const SUPABASE_ANON_KEY = "sb_publishable_U2uwrgYj-cg6DZJLmn5T8Q_jzzbTDEW"; // ex: eyJhbGciOi...
   const USE_SUPABASE = SUPABASE_URL && SUPABASE_ANON_KEY && window.supabase;
   const sb = USE_SUPABASE ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+  // Affiche le statut DB
+  setTimeout(() => { setConnBadge(USE_SUPABASE ? "DB: supabase" : "DB: local"); }, 0);
 
 
   const LS_KEY = "tranqimmo_mvp_var_v1";
@@ -44,7 +46,21 @@
 
   const stageBadge=(k)=>{const st=STAGES.find(s=>s.key===k)||STAGES[0];return `<span class="badge2"><span class="bdot ${st.dot}"></span>${st.label}</span>`;};
 
-  function viewHome(state){
+  
+  async function pingSupabase(){
+    if (!USE_SUPABASE) return;
+    try{
+      const { error } = await sb.from("leads").select("id", { count: "exact", head: true });
+      if (error) throw error;
+      setConnBadge("DB: supabase ✓");
+    }catch(e){
+      console.error("Supabase ping error:", e);
+      setConnBadge("DB: supabase ✕");
+      toast("Connexion Supabase KO (F12 Console) ❌");
+    }
+  }
+
+function viewHome(state){
     return `<section class="section"><div class="container"><div class="grid">
       <div class="card">
         <div class="pillset"><span class="pill">MVP terrain</span><span class="pill">Zone : ${state.region}</span><span class="pill">Pros du bâtiment</span></div>
