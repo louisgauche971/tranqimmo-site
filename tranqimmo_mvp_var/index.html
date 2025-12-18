@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tranqimmo — MVP Pros (Var)</title>
+  <meta name="description" content="MVP Tranqimmo pour professionnels du bâtiment (Var) : demandes de travaux qualifiées + pipeline de suivi." />
+  <meta name="theme-color" content="#070A12" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Aller au contenu</a>
+
+  <header class="topbar" id="top">
+    <div class="container topbar__inner">
+      <a class="brand" href="#/" aria-label="Tranqimmo">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">Tranqimmo</span>
+        <span class="badge">MVP Pros • Var</span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="#/">Accueil</a>
+        <a href="#/demande">Déposer une demande</a>
+        <a href="#/pro">Espace Pro</a>
+        <a href="#/aide" class="nav__cta">Mode test</a>
+      </nav>
+
+      <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <div id="app" class="app"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__left">
+        <span class="footer__mark" aria-hidden="true"></span>
+        <div>
+          <div class="footer__name">Tranqimmo — MVP Pros (Var)</div>
+          <div class="footer__muted">Prototype interactif (données stockées en local sur votre navigateur)</div>
+        </div>
+      </div>
+      <div class="footer__right">
+        <a href="#/aide">Comment tester ?</a><span class="sep">•</span>
+        <a href="#/pro">Espace Pro</a><span class="sep">•</span>
+        <a href="#/demande">Déposer une demande</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
