@@ -1,9 +1,24 @@
-(() => {
+(async () => {
+  // --- Supabase loader (garanti sur Vercel même si index.html ne charge pas le CDN) ---
+  async function ensureSupabase() {
+    if (typeof supabase !== "undefined") return;
+    await new Promise((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+      s.async = true;
+      s.onload = resolve;
+      s.onerror = () => reject(new Error("Impossible de charger supabase-js (CDN)"));
+      document.head.appendChild(s);
+    });
+  }
+
+  await ensureSupabase();
+
   // --- Multi-user sync (optionnel) ---
   // Pour activer : crée un projet Supabase + table `leads` (voir README) puis renseigne ces 2 valeurs.
   const SUPABASE_URL = "https://fescbbgnpuhapbtzyryr.supabase.co";      // ex: https://xxxx.supabase.co
   const SUPABASE_ANON_KEY = "sb_publishable_U2uwrgYj-cg6DZJLmn5T8Q_jzzbTDEW"; // ex: eyJhbGciOi...
-  const USE_SUPABASE = SUPABASE_URL && SUPABASE_ANON_KEY && (typeof supabase !== "undefined");
+  const USE_SUPABASE = !!(SUPABASE_URL && SUPABASE_ANON_KEY && (typeof supabase !== "undefined"));
   const whyLocal = () => {
     if (typeof supabase === "undefined") return "(lib supabase manquante)";
     if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return "(clés vides)";
