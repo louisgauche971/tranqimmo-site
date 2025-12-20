@@ -3,13 +3,13 @@
   // Pour activer : crée un projet Supabase + table `leads` (voir README) puis renseigne ces 2 valeurs.
   const SUPABASE_URL = "https://fescbbgnpuhapbtzyryr.supabase.co";      // ex: https://xxxx.supabase.co
   const SUPABASE_ANON_KEY = "sb_publishable_U2uwrgYj-cg6DZJLmn5T8Q_jzzbTDEW"; // ex: eyJhbGciOi...
-  const USE_SUPABASE = SUPABASE_URL && SUPABASE_ANON_KEY && window.supabase;
+  const USE_SUPABASE = SUPABASE_URL && SUPABASE_ANON_KEY && (typeof supabase !== "undefined");
   const whyLocal = () => {
-    if (!window.supabase) return "(lib supabase manquante)";
+    if (typeof supabase === "undefined") return "(lib supabase manquante)";
     if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return "(clés vides)";
     return "";
   };
-  const sb = USE_SUPABASE ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+  const sb = USE_SUPABASE ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
   // Affiche le statut DB
   setTimeout(() => { setConnBadge(USE_SUPABASE ? "DB: supabase" : ("DB: local " + whyLocal())); }, 0);
 
